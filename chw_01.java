@@ -1,6 +1,6 @@
 public class chw_01 {
 
-    public static void main(String[] args) {
+     public static void main(String[] args) {
         // array basic syntax
         int[] arr = new int[5];
 
@@ -21,7 +21,7 @@ public class chw_01 {
         // update 
 
         arr[0] = 23;
-           System.out.print(arr[0] + " ");
+           System.out.println(arr[0] + " ");
 
     }
 }
