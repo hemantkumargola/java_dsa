@@ -13,22 +13,25 @@ public class chw_06 {
         System.out.println("enter the element ");
         int[] arr = new int[n];
         for (int i = 0; i < n; i++) {
-            arr[i]  = sc.nextInt();
+            arr[i] = sc.nextInt();
         }
 
         // targate
         boolean flag = false;
-        for (int i = 0; i < n ; i++) {
+        for (int i = 0; i < n; i++) {
 
-            if(arr[i] == x)
+            if (arr[i] == x)
                 flag = true;
             break;
-            
+
         }
 
-        if(true) System.out.println("element fount");
-        else System.out.println("not found");
+        if (flag) {
 
+            System.out.println("element fount");
+        } else {
+            System.out.println("not found");
+        }
 
     }
 }
