@@ -1,0 +1,25 @@
+// Generate all binary strings of length n without consecutive
+// 1’s
+
+import java.util.Scanner;
+
+public class chw_20 {
+    public static void printstr(String s ,int n){
+        int m = s.length();
+        if(m==n){
+            System.out.println(s);
+            return;
+        }
+        if(m==0  || s.charAt(m-1)=='0'){
+            printstr(s+1, n);
+            printstr(s+0, n);
+        }
+        else printstr(s+0, n);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        printstr("",n);
+    }
+}
