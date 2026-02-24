@@ -23,4 +23,5 @@ public class chw_02 {
 // addLast() insert at end
 // remove() delete
 // get(i) access element
-// size() length
+
+// size() length     
