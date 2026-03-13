@@ -1,73 +1,68 @@
 public class chw_04 {
 
-    public static boolean isSafe(char board[][], int row, int col) {
+    static int N = 4;
 
-        // check vertical up
-        for(int i = row-1; i >= 0; i--){
-            if(board[i][col] == 'Q'){
-                return false;
-            }
+    static boolean solveMaze(int maze[][]) {
+        int sol[][] = new int[N][N];
+
+        if (solveMazeUtil(maze, 0, 0, sol) == false) {
+            System.out.println("No solution exists");
+            return false;
         }
 
-        // check left diagonal
-        for(int i=row-1, j=col-1; i>=0 && j>=0; i--, j--){
-            if(board[i][j] == 'Q'){
-                return false;
-            }
-        }
-
-        // check right diagonal
-        for(int i=row-1, j=col+1; i>=0 && j<board.length; i--, j++){
-            if(board[i][j] == 'Q'){
-                return false;
-            }
-        }
-
+        printSolution(sol);
         return true;
     }
 
-    public static void nQueen(char board[][], int row) {
+    static boolean solveMazeUtil(int maze[][], int x, int y, int sol[][]) {
 
-        // base case
-        if(row == board.length){
-            printBoard(board);
-            return;
+        // destination reached
+        if (x == N - 1 && y == N - 1 && maze[x][y] == 1) {
+            sol[x][y] = 1;
+            return true;
         }
 
-        // column loop
-        for(int j=0; j<board.length; j++){
+        if (isSafe(maze, x, y)) {
 
-            if(isSafe(board, row, j)){
+            sol[x][y] = 1;
 
-                board[row][j] = 'Q';   // place queen
-                nQueen(board, row+1);  // recursion
-                board[row][j] = '.';   // backtracking
-            }
+            // move down
+            if (solveMazeUtil(maze, x + 1, y, sol))
+                return true;
+
+            // move right
+            if (solveMazeUtil(maze, x, y + 1, sol))
+                return true;
+
+            // backtracking
+            sol[x][y] = 0;
+            return false;
         }
+
+        return false;
     }
 
-    public static void printBoard(char board[][]){
-        System.out.println("------Board------");
-        for(int i=0; i<board.length; i++){
-            for(int j=0; j<board.length; j++){
-                System.out.print(board[i][j] + " ");
-            }
+    static boolean isSafe(int maze[][], int x, int y) {
+        return (x >= 0 && x < N && y >= 0 && y < N && maze[x][y] == 1);
+    }
+
+    static void printSolution(int sol[][]) {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++)
+                System.out.print(sol[i][j] + " ");
             System.out.println();
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String args[]) {
 
-        int n = 4; // board size
-        char board[][] = new char[n][n];
+        int maze[][] = {
+                { 1, 0, 0, 0 },
+                { 1, 1, 0, 1 },
+                { 0, 1, 0, 0 },
+                { 1, 1, 1, 1 }
+        };
 
-        // initialize board
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                board[i][j] = '.';
-            }
-        }
-
-        nQueen(board, 0);
+        solveMaze(maze);
     }
 }
